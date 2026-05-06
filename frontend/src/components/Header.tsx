@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from 'react';
 import { Video, Globe, ChevronDown, Moon, Sun } from 'lucide-react';
 

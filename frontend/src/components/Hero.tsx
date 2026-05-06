@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { Download, Monitor, Smartphone, Youtube, Instagram, Facebook, Link2, AlertCircle, Loader2, Music, Video as VideoIcon, Image as ImageIcon } from 'lucide-react';
 import toast from 'react-hot-toast';

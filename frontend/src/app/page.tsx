@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { Steps } from './components/Steps';
-import { Features } from './components/Features';
-import { FAQ } from './components/FAQ';
+"use client";
 
-function App() {
+import React, { useState } from 'react';
+import { Header } from '../components/Header';
+import { Hero } from '../components/Hero';
+import { Steps } from '../components/Steps';
+import { Features } from '../components/Features';
+import { FAQ } from '../components/FAQ';
+
+export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
 
@@ -25,8 +26,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light font-sans overflow-x-hidden selection:bg-primary/20 transition-colors duration-300">
-      <Toaster position="top-center" toastOptions={{ className: 'dark:bg-[#2C2C2E] dark:text-light border border-dark/10 dark:border-light/10 shadow-xl' }} />
+    <>
       <Header />
       
       <main>
@@ -121,8 +121,6 @@ function App() {
           <button onClick={scrollToContact} className="hover:text-primary transition-colors text-dark dark:text-light">Contact Us</button>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
-
-export default App;

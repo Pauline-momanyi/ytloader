@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #D92525;
+  --color-dark: #1C1C1E;
+  --color-light: #F5F5F5;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@layer base {
+  body {
+    @apply bg-light text-dark font-sans antialiased transition-colors duration-300;
+  }
+  
+  /* Next.js default dark mode support using class strategy */
+  .dark body {
+    @apply bg-dark text-light;
+  }
+}

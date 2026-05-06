@@ -1,3 +1,4 @@
+"use client";
 import { Zap, Clock, Infinity as InfinityIcon, MonitorSmartphone } from 'lucide-react';
 
 const features = [

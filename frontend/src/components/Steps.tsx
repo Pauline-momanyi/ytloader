@@ -1,3 +1,4 @@
+"use client";
 export const Steps = () => {
   return (
     <section className="w-full max-w-5xl mx-auto py-10 px-4">
