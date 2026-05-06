@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-light text-dark font-sans antialiased transition-colors duration-300;
+  }
+  .dark body {
+    @apply bg-dark text-light;
+  }
+}
