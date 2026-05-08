@@ -35,11 +35,11 @@ export default function Home() {
         {/* About section / Free Video Downloader */}
         <section className="text-center py-10 px-4 mt-2">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">
-            Free <span className="text-white bg-primary px-3 py-1 rounded-xl shadow-md transform -rotate-2 inline-block">YouTube</span>
+            Free <span className="text-white bg-primary px-3 py-1 rounded-xl shadow-md transform -rotate-2 inline-block">Universal</span>
             <br className="md:hidden" /> Video Downloader
           </h2>
           <p className="text-dark/60 dark:text-light/60 text-xs md:text-sm max-w-xl mx-auto mb-6 mt-4">
-            With This Platform, You Can Easily Download Any Video<br/>From YouTube For Free
+            With This Platform, You Can Easily Download Any Video<br/>From Any Platform For Free
           </p>
           <div className="flex items-center justify-center gap-4 text-xs font-semibold">
             <button onClick={scrollToContact} className="opacity-60 hover:opacity-100 transition-opacity">Contact Us</button>

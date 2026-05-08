@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "YTLoader - Free YouTube Video Downloader",
-  description: "Easily download any video from YouTube for free with YTLoader.",
+  title: "YTLoader - Universal Video Downloader",
+  description: "Easily download any video from YouTube, TikTok, Instagram, and Facebook for free with YTLoader.",
 };
 
 export default function RootLayout({

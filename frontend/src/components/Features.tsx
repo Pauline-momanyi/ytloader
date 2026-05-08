@@ -5,12 +5,12 @@ const features = [
   {
     icon: <Zap className="w-5 h-5 text-primary" />,
     title: "High Quality",
-    desc: "You can download all the videos in the YouTube library without losing quality. Just in a short time, all videos can be downloaded in MP4 and even MP3 formats."
+    desc: "You can download videos from your favorite social platforms without losing quality. In just a short time, videos can be downloaded in MP4 and even MP3 formats."
   },
   {
     icon: <Clock className="w-5 h-5 text-primary" />,
     title: "Fast Downloading",
-    desc: "Using YTLoader, quickly download your desired videos from YouTube with just a few simple clicks. Without wasting any time or paying extra fees."
+    desc: "Using YTLoader, quickly download videos from YouTube, TikTok, Instagram & more with just a few simple clicks. Without wasting any time or paying extra fees."
   },
   {
     icon: <InfinityIcon className="w-5 h-5 text-primary" />,
@@ -30,7 +30,7 @@ export const Features = () => {
       <div className="mb-10">
         <span className="text-dark/50 dark:text-light/50 text-xs font-semibold tracking-widest uppercase block mb-1">Why To Choose</span>
         <h2 className="text-2xl md:text-4xl font-bold text-dark dark:text-light">
-          <span className="text-primary italic font-black">VideoMax</span> Downloader
+          <span className="text-primary italic font-black">YTDownloader</span>
         </h2>
       </div>
 

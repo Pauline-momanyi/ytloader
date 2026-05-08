@@ -7,6 +7,11 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use((req, res, next) => {
+  console.log("INCOMING REQUEST:", req.method, req.url);
+  next();
+});
+
 app.use(cors());
 app.use(express.json());
 
@@ -200,6 +205,34 @@ app.post('/api/download', (req, res) => {
     }
     res.end();
   });
+});
+
+app.get('/api/thumbnail', async (req, res) => {
+  console.log("HIT /api/thumbnail");
+  const { url } = req.query;
+  console.log("URL:", url);
+  if (!url) return res.status(400).send('URL is required');
+
+  try {
+    console.log("Fetching url...");
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
+      }
+    });
+    console.log("Fetch complete. Status:", response.status);
+    if (!response.ok) throw new Error('Failed to fetch image');
+    
+    res.setHeader('Content-Type', response.headers.get('content-type') || 'image/jpeg');
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    res.send(buffer);
+  } catch (e) {
+    console.error('Proxy error:', e);
+    res.status(500).send('Error proxying image');
+  }
 });
 
 app.listen(PORT, () => {

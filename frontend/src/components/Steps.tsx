@@ -14,14 +14,14 @@ export const Steps = () => {
         <div className="w-full md:w-1/2">
           <span className="text-dark/50 dark:text-light/50 text-xs font-semibold tracking-widest uppercase block mb-1">How to use</span>
           <h2 className="text-3xl font-bold text-dark dark:text-light mb-6">
-            <span className="text-primary font-black">YouTube</span> Downloader
+            <span className="text-primary font-black">Universal</span> Downloader
           </h2>
           
           <div className="space-y-6">
             {[
-              { num: '01', title: 'Find Video', desc: 'Find the video you want from among the videos available on YouTube and copy its link.' },
-              { num: '02', title: 'Paste Video', desc: 'Paste the copied link in the desired box and wait for the system to display the desired video download links.' },
-              { num: '03', title: 'Download Video', desc: 'Just in the last step, click on download from the displayed list and download the desired video and save it on your device.' }
+              { num: '01', title: 'Find Video', desc: 'Find the video you want from among the videos available online and copy its link.' },
+              { num: '02', title: 'Paste Video', desc: 'Paste the copied link in the desired box and wait for the system to display the video download links.' },
+              { num: '03', title: 'Download Video', desc: 'Just in the last step, click on download from the displayed list and save it on your device.' }
             ].map((step, i) => (
               <div key={i} className="flex gap-4 items-start">
                 <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center font-bold text-base shadow-sm ${i === 1 ? 'bg-primary text-white' : 'bg-white dark:bg-[#2C2C2E] text-primary border border-primary/20 dark:border-primary/40'}`}>

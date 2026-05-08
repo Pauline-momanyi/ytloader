@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Download, Monitor, Smartphone, Youtube, Instagram, Facebook, Link2, AlertCircle, Loader2, Music, Video as VideoIcon, Image as ImageIcon } from 'lucide-react';
+import { Download, Monitor, Smartphone, Youtube, Instagram, Facebook, Link2, AlertCircle, Loader2, Music, Video as VideoIcon, Image as ImageIcon, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { validateTimestamp } from '../utils/validation';
 
@@ -17,6 +17,18 @@ export const Hero = () => {
   const [isFetchingInfo, setIsFetchingInfo] = useState(false);
   const [videoInfo, setVideoInfo] = useState<any>(null);
   const [selectedFormat, setSelectedFormat] = useState('');
+
+  const handleClear = () => {
+    setUrl('');
+    setVideoInfo(null);
+    setThumbnail(null);
+    setIsVideoFound(false);
+    setShowPreview(false);
+    setDownloadProgress(null);
+    setTimeFrom('');
+    setTimeTo('');
+    setIsFetchingInfo(false);
+  };
 
   const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newUrl = e.target.value;
@@ -229,11 +241,16 @@ export const Hero = () => {
             <Link2 className="text-dark/40 dark:text-light/40 w-5 h-5 mr-3 shrink-0" />
             <input 
               type="text" 
-              placeholder="Insert Youtube, Instagram or Facebook Link..."
+              placeholder="Paste any YouTube, TikTok, or Instagram link..."
               className="w-full bg-transparent outline-none text-dark dark:text-light placeholder:text-dark/40 dark:placeholder:text-light/40 text-sm"
               value={url}
               onChange={handleUrlChange}
             />
+            {url && (
+              <button onClick={handleClear} className="p-1 text-dark/40 hover:text-primary dark:text-light/40 dark:hover:text-primary transition-colors focus:outline-none shrink-0" title="Clear">
+                <X className="w-5 h-5" />
+              </button>
+            )}
           </div>
 
           {/* Conditional Format Selector */}
@@ -334,7 +351,7 @@ export const Hero = () => {
                       </div>
                    )}
                 </div>
-                {thumbnail && <img src={thumbnail} alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
+                {thumbnail && <img src={`http://localhost:3001/api/thumbnail?url=${encodeURIComponent(thumbnail)}`} alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
                 <div className="absolute top-4 left-4 bg-green-500/90 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-md z-20 backdrop-blur-sm max-w-[200px] truncate text-left">
                   {videoInfo?.title ? videoInfo.title : 'Video Found ✓'}
                 </div>
@@ -359,7 +376,7 @@ export const Hero = () => {
                  <AlertCircle className="w-12 h-12 mb-3 opacity-80" />
                  <p className="font-semibold text-sm">Video Not Found</p>
                  <p className="text-xs opacity-70 mt-1 max-w-xs text-dark dark:text-light">
-                    The URL provided does not seem to point to a valid YouTube, Instagram, or Facebook video. Please check the link and try again.
+                    The URL provided does not seem to point to a valid YouTube, TikTok, Instagram, or Facebook video. Please check the link and try again.
                  </p>
               </div>
             )}
