@@ -95,7 +95,7 @@ export const Hero = () => {
     // --- ASYNC BACKGROUND METADATA FETCHING ---
     // Silently fetch formats in the background without blocking the UI
     try {
-      const res = await fetch('http://localhost:3001/api/info', {
+      const res = await fetch('https://api.ytloader.mohdevs.com/api/info', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: newUrl })
@@ -151,7 +151,7 @@ export const Hero = () => {
     const clientId = Date.now().toString() + Math.random().toString(36).substring(7);
 
     // Open Server-Sent Events connection to listen for progress
-    const eventSource = new EventSource(`http://localhost:3001/api/progress/${clientId}`);
+    const eventSource = new EventSource(`https://api.ytloader.mohdevs.com/api/progress/${clientId}`);
     eventSource.onmessage = (event) => {
        try {
           const data = JSON.parse(event.data);
@@ -177,7 +177,7 @@ export const Hero = () => {
         clientId
       };
 
-      const response = await fetch('http://localhost:3001/api/download', {
+      const response = await fetch('https://api.ytloader.mohdevs.com/api/download', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -351,7 +351,7 @@ export const Hero = () => {
                       </div>
                    )}
                 </div>
-                {thumbnail && <img src={`http://localhost:3001/api/thumbnail?url=${encodeURIComponent(thumbnail)}`} alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
+                {thumbnail && <img src={`https://api.ytloader.mohdevs.com/api/thumbnail?url=${encodeURIComponent(thumbnail)}`} alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
                 <div className="absolute top-4 left-4 bg-green-500/90 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-md z-20 backdrop-blur-sm max-w-[200px] truncate text-left">
                   {videoInfo?.title ? videoInfo.title : 'Video Found ✓'}
                 </div>
