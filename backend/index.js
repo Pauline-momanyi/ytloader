@@ -48,7 +48,7 @@ app.post('/api/info', (req, res) => {
 
   // Use `--dump-json`, `--no-playlist`, and `--no-warnings` for blazing speed
   // NOTE: Disabling file size calculations in map below.
-  const ytProcess = spawn('yt-dlp', ['--dump-json', '--no-playlist', '--no-warnings', '--extractor-args', 'youtube:player_client=android', url]);
+  const ytProcess = spawn('yt-dlp', ['--dump-json', '--no-playlist', '--no-warnings', '--force-ipv4', '--js-runtimes', 'node', '--extractor-args', 'youtube:player_client=android', url]);
   let output = '';
   let errorOutput = '';
 
@@ -140,6 +140,8 @@ app.post('/api/download', (req, res) => {
   const ytDlpArgs = [
     '-f', selectedFormat,
     '-o', '-',
+    '--force-ipv4',
+    '--js-runtimes', 'node',
     '--extractor-args', 'youtube:player_client=android'
   ];
 
