@@ -364,7 +364,7 @@ export const Hero = () => {
                       </div>
                    )}
                 </div>
-                {thumbnail && <img src={`https://api.ytloader.mohdevs.com/api/thumbnail?url=${encodeURIComponent(thumbnail)}`} alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
+                {thumbnail && <img src={thumbnail.includes('unsplash.com') || thumbnail.includes('youtube.com') ? thumbnail : `https://api.ytloader.mohdevs.com/api/thumbnail?url=${encodeURIComponent(thumbnail)}`} alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
                 <div className="absolute top-4 left-4 bg-green-500/90 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-md z-20 backdrop-blur-sm max-w-[200px] truncate text-left">
                   {videoInfo?.title ? videoInfo.title : 'Video Found ✓'}
                 </div>

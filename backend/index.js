@@ -144,10 +144,10 @@ app.post('/api/download', (req, res) => {
   // Strongly prefer MP4 video and M4A audio. Never WEBM.
   const selectedFormat = formatId ? formatId : 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best';
   
-  // We use `-o -` to force yt-dlp to stream the binary data directly to standard output!
   const ytDlpArgs = [
     '-f', selectedFormat,
     '-o', '-',
+    '--newline',
     '--force-ipv4',
     '--js-runtimes', 'node',
     '--extractor-args', 'youtube:player_client=android'
