@@ -78,13 +78,13 @@ export const Hero = () => {
          foundViaRegex = true;
        }
     } else if (newUrl.includes('instagram.com/')) {
-       setThumbnail('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80');
+       setThumbnail('https://placehold.co/800x450/E1306C/FFFFFF?text=Instagram+Video');
        foundViaRegex = true;
     } else if (newUrl.includes('facebook.com/')) {
-       setThumbnail('https://images.unsplash.com/photo-1611162617215-6ac219488a91?w=800&q=80');
+       setThumbnail('https://placehold.co/800x450/1877F2/FFFFFF?text=Facebook+Video');
        foundViaRegex = true;
     } else if (newUrl.includes('tiktok.com')) {
-       setThumbnail('https://images.unsplash.com/photo-1611162618758-6a2e94ffebcb?w=800&q=80');
+       setThumbnail('https://placehold.co/800x450/000000/FFFFFF?text=TikTok+Video');
        foundViaRegex = true;
     }
 
@@ -96,13 +96,9 @@ export const Hero = () => {
     const isLongFormYouTube = newUrl.includes('youtube.com/watch') || newUrl.includes('youtu.be/');
 
     if (!isLongFormYouTube) {
-       // For Shorts, TikTok, Instagram, Facebook, we skip fetching formats 
-       // to avoid Datacenter IP Bot Blocks. We just let the user download the 'best' format directly.
-       setIsFetchingInfo(false);
-       setVideoInfo({ title: 'Ready to Download (Best Quality)' });
+       // We still fetch info to grab the thumbnail and title, but we pre-set the format to 'best'
+       // so we can hide the format selector later.
        setSelectedFormat('best');
-       setIsVideoFound(true);
-       return;
     }
 
     // --- ASYNC BACKGROUND METADATA FETCHING ---
@@ -120,6 +116,12 @@ export const Hero = () => {
          throw new Error(data.error || 'Failed to fetch video information.');
       }
       
+      // If it's not long-form YouTube, nuke the formats array so the UI doesn't render the dropdown
+      if (!isLongFormYouTube) {
+         data.formats = [];
+         setSelectedFormat('best');
+      }
+
       setVideoInfo(data);
       
       // If the backend found a real thumbnail, swap it in smoothly
@@ -364,7 +366,7 @@ export const Hero = () => {
                       </div>
                    )}
                 </div>
-                {thumbnail && <img src={thumbnail.includes('unsplash.com') || thumbnail.includes('youtube.com') ? thumbnail : `https://api.ytloader.mohdevs.com/api/thumbnail?url=${encodeURIComponent(thumbnail)}`} alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
+                {thumbnail && <img src={thumbnail.includes('placehold.co') || thumbnail.includes('youtube.com') ? thumbnail : thumbnail} referrerPolicy="no-referrer" alt="Video Preview" className="w-full h-auto max-h-[300px] object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />}
                 <div className="absolute top-4 left-4 bg-green-500/90 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-md z-20 backdrop-blur-sm max-w-[200px] truncate text-left">
                   {videoInfo?.title ? videoInfo.title : 'Video Found ✓'}
                 </div>
