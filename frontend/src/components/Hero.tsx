@@ -92,6 +92,19 @@ export const Hero = () => {
        setIsVideoFound(true);
     }
 
+    // Identify if the video is long-form YouTube
+    const isLongFormYouTube = newUrl.includes('youtube.com/watch') || newUrl.includes('youtu.be/');
+
+    if (!isLongFormYouTube) {
+       // For Shorts, TikTok, Instagram, Facebook, we skip fetching formats 
+       // to avoid Datacenter IP Bot Blocks. We just let the user download the 'best' format directly.
+       setIsFetchingInfo(false);
+       setVideoInfo({ title: 'Ready to Download (Best Quality)' });
+       setSelectedFormat('best');
+       setIsVideoFound(true);
+       return;
+    }
+
     // --- ASYNC BACKGROUND METADATA FETCHING ---
     // Silently fetch formats in the background without blocking the UI
     try {

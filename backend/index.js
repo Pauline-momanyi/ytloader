@@ -48,7 +48,15 @@ app.post('/api/info', (req, res) => {
 
   // Use `--dump-json`, `--no-playlist`, and `--no-warnings` for blazing speed
   // NOTE: Disabling file size calculations in map below.
-  const ytProcess = spawn('yt-dlp', ['--dump-json', '--no-playlist', '--no-warnings', '--force-ipv4', '--js-runtimes', 'node', '--extractor-args', 'youtube:player_client=android', url]);
+  const ytInfoArgs = ['--dump-json', '--no-playlist', '--no-warnings', '--force-ipv4', '--js-runtimes', 'node', '--extractor-args', 'youtube:player_client=android'];
+  const isLongFormYouTube = url.includes('youtube.com/watch') || url.includes('youtu.be/');
+  const cookiesPath = path.join(__dirname, 'cookies.txt');
+  if (isLongFormYouTube && fs.existsSync(cookiesPath)) {
+    ytInfoArgs.push('--cookies', cookiesPath);
+  }
+  ytInfoArgs.push(url);
+
+  const ytProcess = spawn('yt-dlp', ytInfoArgs);
   let output = '';
   let errorOutput = '';
 
@@ -144,6 +152,12 @@ app.post('/api/download', (req, res) => {
     '--js-runtimes', 'node',
     '--extractor-args', 'youtube:player_client=android'
   ];
+
+  const isLongFormYouTube = url.includes('youtube.com/watch') || url.includes('youtu.be/');
+  const cookiesPath = path.join(__dirname, 'cookies.txt');
+  if (isLongFormYouTube && fs.existsSync(cookiesPath)) {
+    ytDlpArgs.push('--cookies', cookiesPath);
+  }
 
   if (timeFrom || timeTo) {
     const start = timeFrom || '0';
