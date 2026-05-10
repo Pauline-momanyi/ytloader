@@ -181,7 +181,9 @@ app.post('/api/download', (req, res) => {
   downloadProcess.stdout.pipe(res);
 
   downloadProcess.stderr.on('data', (data) => {
-    const text = data.toString().trim();
+    const rawData = data.toString();
+    const lines = rawData.split(/[\r\n]+/);
+    const text = lines[lines.length - 1].trim() || (lines.length > 1 ? lines[lines.length - 2].trim() : '');
     // typical stdout for yt-dlp: [download]  45.0% of   50.00MiB at    5.00MiB/s ETA 00:05 Wait
     
     // Broadcast to SSE if client provided an ID
